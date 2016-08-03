@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-root 'welcome#index'
+  
+  #define root path
+  # root 'welcome#index'
+  root 'users#index'
+  #宣告單一路徑，指定 users/ 這個 url 會對應到 users_controller 的 index method
+  get 'users' => 'users#index'
+  # 或是用 resources 宣告整組路徑
+  resources :users
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

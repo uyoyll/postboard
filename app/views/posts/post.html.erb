@@ -1,0 +1,17 @@
+<% @posts.each do |post| %>
+<p><%= post.title %></p>
+<hr>
+
+<div>
+  <div>
+    <!-- 顯示 post.title 和 content -->
+    
+    <p><%= post.content %></p>
+
+    <span>
+      <!-- link_to 會產生出 html <a> tag -->
+       <%= link_to "show post", posts_path(post)%>
+    </span>
+  </div>
+</div>
+    <% end %>

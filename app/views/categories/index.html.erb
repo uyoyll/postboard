@@ -1,0 +1,13 @@
+<%= render 'shared/title', title: 'All Categories'%>
+ 
+<% @categories.each do |category| %>
+<span class="label label-info">
+  <%= category.name %></span>
+<% end %>
+<br/>
+<br/>
+
+
+<span >
+<%= link_to 'Create New Category',new_category_path%>
+</span>

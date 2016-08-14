@@ -1,47 +1,46 @@
-
-<%= render 'shared/title',title:'Post Content' %>
-
+<%= render 'shared/title',title:"#{@post.title}" %>
 <div class="col-md-8">
-
 <div class="panel panel-primary">
  <div class="panel-heading">
- <h4> 	<%= @post.title %></h4></div>
+ <h4><%= @post.title %></h4>
+ </div>
  <div class="panel-body">
- <p><%= @post.content %></p></div>
- <div class="panel-footer"> <small>posted by </small>
- <%= " #{@post.user.name}" %></div>
+ <p><%= @post.content %></p>
+ </div>
+ <div class="panel-footer "><small>posted by </small>
+ <%= link_to "#{@post.user.name}", user_path(current_user) %>
+ <a class="Byname"  href="user_path(current_user) "><%= "#{@post.user.name}" %></a>
+ </div>
 </div>
 
-      
+ 
 <div class="panel panel-success">
     <div class="panel-heading">
     <h5>All Comments:</h5></div>
- <%= @post.comments.each do |comment| %>
+   <% @post.comments.each do |comment| %>
  <div class="panel-body">
      <p>
         <%= comment.content %>
       </p>
     </div>
     <div class="panel-footer">  <small>commented by </small>
-    <%= "#{comment.user.name}" %></div>    
-   
+   <a class="Byname"><%= "#{comment.user.name}" %></a>
+    </div>    
+    <% end %>
 </div>
-  <% end %>
+ 
 
 <% if logged_in? %>
-<div class="panel panel-warning">
-<div class="panel-heading">
-  <h4>Leave acomment:</h4></div>
-   <%= form_for [@post, @comment] do |f| %>
-      <div class="row">
-      <%= f.text_area :content, rows: 3, class: 'col-md-4' %>
-       <div class="col-md-2">
-      <%= f.submit 'Create Comment', class: 'btn btn-warning' %>
+<div class="panel-default">
+    <div class="panel-heading">
+ <h5>Leave a comment:</h5></div>
+  <%= form_for [@post, @comment] do |f| %>
+    <div class="panel-body">
+      <%= f.text_area :content, rows: 3 ,class: 'panel-body col-md-8'%></div><br/>
+      <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
       </div>
-  <% end %>
     </div>
  <% end %>
-
-
-<%= link_to 'go back to all posts', posts_path %>
+ <% end %>
+<%= render 'shared/footer' %>
 </div>

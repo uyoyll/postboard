@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'users' => 'users#index'
   get 'posts' => 'posts#index'
   get 'categories' => 'categories#index'
-
+  get '/popular' ,to:'posts#popular'
   get '/register', to: 'users#new'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -23,13 +23,11 @@ Rails.application.routes.draw do
   resources :posts, except: [:destroy] do  #不需要destroy
     member do # 客製化連結
       post :vote
-      # 這樣會產出 posts/1/vote
     end
 
     resources :comments, only: [:create, :show] do
       member do
         post :vote
-        # 產出 posts/1/comments/1/vote
       end
     end
   end

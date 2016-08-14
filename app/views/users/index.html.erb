@@ -1,18 +1,36 @@
-<h1>Hello World!</h1>
+<%= render 'shared/title', title: "#{@user.name}'s activities"%>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="well col-md-6">
 
-  <tbody>
-    <%= @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @user.posts.each do |post| %>
+
+<div class="panel panel-primary">
+ <div class="panel-heading">
+ <h4><%= @post.title %></h4>
+ </div>
+ <div class="panel-body">
+ <p><%= @post.content %></p>
+ </div>
+ <div class="panel-footer "><small>posted by </small>
+ <%= link_to "#{@post.user.name}", user_path(current_user) %>
+ <a class="Byname"  href="user_path(current_user) "><%= "#{@post.user.name}" %></a>
+ </div>
+</div>
+<% end %>
+
+<div class="panel panel-success">
+ <div class="panel-heading">
+<h4><%= current_user.name %>'s comments:</h4>
+</div>
+<% @user.comments.each do |comment| %>
+<div class="panel-body">
+      <p>
+        <%= comment.content %>
+      </p>
+      <!-- <small>commented by </small><%= "#{comment.user.name}" %> -->
+    </div>
+  </div>
+<% end %>
+<hr/>
+<%= link_to 'Back', root_path %>
+</div>
